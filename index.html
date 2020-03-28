@@ -1,0 +1,379 @@
+
+<!DOCTYPE html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<style>
+  html,
+  body {
+    background-color: #EAEAEA;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .target {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  [class^="cir"] {
+    width: 500px;
+    height: 500px;
+    border-radius: 25%;
+    background-color: #fff;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: 0.5s;
+    cursor: pointer;
+  }
+
+  [class^="cir"].cir1 {
+    width: 100px;
+    height: 100px;
+    z-index: 5;
+  }
+
+  [class^="cir"].cir2 {
+    width: 200px;
+    height: 200px;
+    z-index: 4;
+  }
+
+  [class^="cir"].cir3 {
+    width: 300px;
+    height: 300px;
+    z-index: 3;
+  }
+
+  [class^="cir"].cir4 {
+    width: 400px;
+    height: 400px;
+    z-index: 2;
+  }
+
+  [class^="cir"].cir5 {
+    width: 500px;
+    height: 500px;
+    z-index: 1;
+    border: 10px solid orange;
+    box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.3);
+  }
+
+  [class^="cir"]:nth-child(2n+1) {
+    background-color:olivedrab;
+  }
+
+  [class^="cir"]:active {
+    transition: 0s;
+    filter: brightness(80%);
+  }
+
+  [class^="cir"]:before {
+    content: attr(data-label);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    top: 20px;
+  }
+
+  .target.movinge {
+    animation: movinge 1s infinite alternate;
+  }
+
+  .target.movingh {
+    animation: movingh 0.7s infinite alternate;
+  }
+
+
+  @keyframes movinge {
+    0% {
+      transform: translate(-200px, -100px);
+    }
+    30% {
+      transform: translate(-100px, 100px);
+    }
+
+    60% {
+      transform: translate(100px, 000px);
+    }
+
+    100% {
+      transform: translate(200px, 100px);
+    }
+  }
+  @keyframes movingh {
+    0% {
+      transform: translate(-200px, -000px);
+    }
+    
+    30% {
+      transform: translate(200px,-100px);
+    }
+
+    70% {
+      transform: translate(-200px, -50px);
+    }
+
+    100% {
+      transform: translate(200px, 150);
+    }
+  }
+
+
+  
+  .infos {
+    position: fixed;
+    left: 50px;
+    top: 50px;
+    z-index: 10;
+  }
+
+  .infos h1,
+  .infos h3 {
+    margin: 0;
+  }
+
+  .infos h1 {
+    font-size: 50px;
+    color:blue
+  }
+
+  .infos h3 {
+    opacity: 0.4;
+    color: crimson
+  }
+
+  .mouseSymbol {
+    position: absolute;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  .mouseSymbol:before,
+  .mouseSymbol:after {
+    content: "";
+    display: block;
+    width: 40px;
+    height: 8px;
+    background-color: red;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .mouseSymbol:before {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  .mouseSymbol:after {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+
+  .spot {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 50;
+  }
+
+/* ================================== */
+  button{
+	cursor:pointer;
+	border:none;
+	color:#FFF;
+ background:#45ABB5;
+	border-radius:3px;
+}
+
+button:focus{
+	outline:none;
+}
+
+button:hover{
+	background:#3A8E96;
+	transition:background .3s;
+}
+
+h1{
+	margin:170px 0 20px;
+	font-size:5em;
+	font-weight:bold;
+}
+
+#click{
+	padding:15px 50px;
+	font-size:1.7em;
+}
+
+#bg{
+	position:fixed;
+	left:0;
+	top:0;
+	height:100%;
+	width:100%;
+	background:rgba(0, 0, 0, .4);
+}
+
+#alertBox{
+	margin:200px auto 0;
+	text-align:center;
+	padding-top:25px;
+	width:500px;
+	height:685px;
+	background:#FFF;
+	border-radius:3px;
+	box-shadow:2px 2px rgba(0, 0, 0, .3);
+}
+
+#alertBox p{
+	font-size:1.4em;
+	margin-bottom:80px;
+}
+
+#alertBox #ok{
+	padding:5px 20px;
+	font-size:1em;
+}
+
+h1{
+  color: blue;
+}
+
+
+  /* ================================================== */
+</style>
+
+
+<h3 class="mouseText"></h3>
+<div class="mouseSymbol"></div>
+
+<div class="target">
+
+  <div class="cir1" data-label="5"></div>
+  <div class="cir2" data-label="4"></div>
+  <div class="cir3" data-label="3"></div>
+  <div class="cir4" data-label="2"></div>
+  <div class="cir5" data-label="1"></div>
+</div>
+
+<div class="infos">
+
+    <h1 class="countbox">經過了x秒</1>
+  <h1 class="score">打靶分數: 0</h1>
+  <h3 class="explain">重新開始 按R鍵 , <br>簡單模式按 K鍵
+     <br>困難模式h鍵                          
+  </h3>
+</div>
+<!-- ===================================== -->
+<div id="bg">
+  <div id="alertBox">
+    <p>"恭喜你,過關了",<br>
+     <h1>你的优惠碼是17458 </h1></p>
+    <button id="ok">我己複製優惠碼</button>
+  </div>
+</div>
+
+<!-- ======================== -->
+
+
+<script>
+
+$("#bg").hide();
+
+// ========================…
+
+
+  var score = 0
+
+  $("[class^='cir']").click(function () {
+    let add = $(this).attr('data-label')
+    console.log(add)
+    score += parseInt(add * 10)
+    updateGame()
+  })
+
+  $(window).keydown(function (evt) {
+    console.log(evt.key)
+    if (evt.key == "r") {
+      resetGame()
+    }
+    if (evt.key == "k") {
+      $(".target").toggleClass("movinge")
+    }
+
+    if (evt.key == "h") {
+      $(".target").toggleClass("movingh")
+    }
+
+  })
+
+  var sec=1;
+  var timer = setInterval(function(){
+  $(".countbox").text("經過了:"+sec+"秒");
+  sec=sec+1;
+  },1000);
+
+
+
+  function updateGame() {
+    $(".score").text("Score: " + score)
+    if(score>180 & sec<5 ){
+    
+     
+      $("#bg").fadeIn(300);
+      $(".mouseSymbol").hide();
+      clearInterval(timer)
+    }
+  }
+
+  $("#ok").click(function(){
+		$("#bg").fadeOut(300);
+	});
+
+
+
+
+  function resetGame() {
+    score = 0
+    updateGame()
+    $(".target").removeClass("moving")
+    $(".spot").remove()
+  }
+
+  $(window).mousemove(function (evt) {
+    $(".mouseText").text(   ` 箭頭的座標    (${evt.pageX},${evt.pageY})`)
+    $(".mouseSymbol")
+      .css("left", evt.pageX + "px")
+      .css("top", evt.pageY + "px")
+  })
+
+  $(".target").click(function (evt) {
+    var spot = $("<div class=spot></div>")
+    spot.css("left", evt.pageX - $(this).offset().left + "px")
+      .css("top", evt.pageY - $(this).offset().top + "px")
+    $(this).append(spot)
+    console.log(spot)
+  })
+
+
+ 
+</script>
